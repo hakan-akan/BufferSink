@@ -51,10 +51,6 @@ void CommandFactory::registerBuiltins()
     _commandFactory.registerClass("CWD"  , new Instantiator<ChangeDirCommand , Command>);
     _commandFactory.registerClass("PWD"  , new Instantiator<CurrentDirCommand, Command>);
 
-    void setFile(const std::string& name);
-
-    void rmdir(const std::string& path);
-
 }
 
 }
