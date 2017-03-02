@@ -51,7 +51,7 @@ void IITPServerConnection::run()
 //                    if (request.expectContinue())
 //                        response.sendContinue();
 
-                    pHandler->handleRequest();
+                    pHandler->handleRequest(session);
                     //session.setKeepAlive(_pParams->getKeepAlive() && response.getKeepAlive() && session.canKeepAlive());
                 }
                 else sendErrorResponse(session, IITP_NOT_IMPLEMENTED);

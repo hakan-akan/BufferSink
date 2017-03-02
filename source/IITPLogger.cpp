@@ -2,11 +2,12 @@
 #include "IITPLogger.h"
 #include "IITPServer.h"
 #include "IITPServerParams.h"
+#include "IITPRequestProcess.h"
 
 using Poco::Net::ServerSocket;
 using Innovative::IITPServer;
 using Innovative::IITPServerParams;
-
+using Innovative::RequestHandlerFactory;
 
 IITPLoggerServerApp::IITPLoggerServerApp(): _helpRequested(false)
 {
@@ -62,14 +63,20 @@ int IITPLoggerServerApp::main(const std::vector<std::string> &/*args*/)
     }
     else
     {
-        unsigned short port = (unsigned short) config().getInt("IITPLoggerServer.port", 9980);
+        // Command and data sockets
+        typedef unsigned short ushort;
+
+        unsigned short cport = (ushort) config().getInt("IITPLoggerServer.cport", 9980);
+        unsigned short dport = (ushort) config().getInt("IITPLoggerServer.dport", 9981);
+        std::string home     = config().getString("IITPLoggerServer.home", Poco::Path::home());
 
         logger().information("Listening port...");
 
-        // set-up a server socket
-        ServerSocket svs(port);
+        // set-up a server command&data sockets
+        ServerSocket svsc(cport);
+        ServerSocket svsd(dport);
 
-        IITPServer srv(new FormRequestHandlerFactory, svs, new IITPServerParams);
+        IITPServer srv(new RequestHandlerFactory(svsd, home), svsc, new IITPServerParams);
 
         srv.start();
 

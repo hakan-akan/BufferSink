@@ -10,14 +10,18 @@ DEFINES += GCC Foundation_EXPORTS POCO_NO_SOO
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    IITPLogger.cpp \
-    IITPRequestHandlerFactory.cpp \
-    IITPServer.cpp \
-    IITPRequestHandler.cpp \
-    IITPServerConnectionFactory.cpp \
-    IITPServerConnection.cpp \
-    IITPServerParams.cpp \
-    IITPServerSession.cpp
+    source/IITPCommands.cpp \
+    source/IITPFactory.cpp \
+    source/IITPLogger.cpp \
+    source/IITPRequestHandler.cpp \
+    source/IITPRequestHandlerFactory.cpp \
+    source/IITPRequestProcess.cpp \
+    source/IITPServer.cpp \
+    source/IITPServerConnection.cpp \
+    source/IITPServerConnectionFactory.cpp \
+    source/IITPServerParams.cpp \
+    source/IITPServerSession.cpp
+
 
 HOMEDIR = $$(INNOVATIVECOMMON)
 
@@ -31,7 +35,8 @@ else {
     DESTDIR = Release
 }
 
-INCLUDEPATH = $$HOMEDIR/Malibu \
+INCLUDEPATH = ./source \
+             $$HOMEDIR/Malibu \
              $$HOMEDIR/Malibu/Poco/Net/include \
              $$HOMEDIR/Malibu/Poco/Foundation/include
 
@@ -51,11 +56,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 HEADERS += \
-    IITPLogger.h \
-    IITPRequestHandlerFactory.h \
-    IITPServer.h \
-    IITPRequestHandler.h \
-    IITPServerConnectionFactory.h \
-    IITPServerConnection.h \
-    IITPServerParams.h \
-    IITPServerSession.h
+    source/IITPCommands.h \
+    source/IITPFactory.h \
+    source/IITPLogger.h \
+    source/IITPRequestHandler.h \
+    source/IITPRequestHandlerFactory.h \
+    source/IITPRequestProcess.h \
+    source/IITPServer.h \
+    source/IITPServerConnection.h \
+    source/IITPServerConnectionFactory.h \
+    source/IITPServerParams.h \
+    source/IITPServerSession.h

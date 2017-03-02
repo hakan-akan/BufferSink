@@ -33,6 +33,17 @@ public:
 		
 	SocketAddress serverAddress();
 		
+    int write(const char* buffer, std::streamsize length)
+    {
+        return HTTPSession::write(buffer, length);
+    }
+
+
+    int receive(char* buffer, int length)
+    {
+        return HTTPSession::receive(buffer, length);
+    }
+
 private:
 	bool           _firstRequest;
 	Poco::Timespan _keepAliveTimeout;
